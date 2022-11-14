@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div style="display:flex ;justify-content: end;">
+            <button class="btn btn-primary btn-sm" (click)="openUpdateModal(categoryModel)"><i
+                    class="fa fa-plus"></i></button>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Created Date</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of categories">
+                        <th>
+                            <button class="btn btn-primary btn-sm" style="margin-right: 10px;"
+                                (click)="openUpdateModal(category)"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)"><i
+                                    class="fa fa-trash"></i></button>
+                        </th>
+                        <td>{{category.categoryName}}</td>
+                        <td>{{category.createdDate|date:"dd-MM-yyyy hh:mm"}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="saveCategory()">
+    <div class="modal fade" id="updatecategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Category</h5>
+                    <a class="close" (click)="this.formModal.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="id" formControlName="id">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="this.formModal.hide()">Close</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

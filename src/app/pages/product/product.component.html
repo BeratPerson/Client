@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div style="display:flex ;justify-content: end;">
+            <button class="btn btn-primary btn-sm"
+                (click)="openSaveProductModal(productModel)"><i class="fa fa-plus"></i></button>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Created Date</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <th>
+                            <button class="btn btn-primary btn-sm" style="margin-right: 10px;"
+                                (click)="openSaveProductModal(product)"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)"><i
+                                    class="fa fa-trash"></i></button>
+                        </th>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.createdDate|date:"dd-MM-yyyy hh:mm"}}</td>
+                        <td>{{product.stock}}</td>
+                        <td>{{product.price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="saveProduct()">
+    <div class="modal fade" id="updateproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Product</h5>
+                    <a class="close" (click)="this.formModal.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="id" formControlName="id">
+
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" formControlName="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="stock" class="col-form-label">Stock:</label>
+                        <input type="number" class="form-control" id="stock" formControlName="stock">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryId" class="col-form-label">Category:</label>
+                        <select class="form-control" id="categoryId" formControlName="categoryId">
+                            <option *ngFor="let category of categories; let i = index" [ngValue]="category.id"
+                                [selected]="i === 0">
+                                {{ category.categoryName }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="this.formModal.hide()">Close</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
