@@ -75,16 +75,16 @@ export class ProductComponent implements OnInit {
     if (this.product.id == 0) {
       this.productService.addProduct(this.product).subscribe(response => {
         this.notificationService.showSuccess(response.message, "Success")
+        this.getAllProduct();
       })
     }
     else {
       this.productService.updateProduct(this.product).subscribe(response => {
         this.notificationService.showSuccess(response.message, "Success")
+        this.getAllProduct();
       })
     }
     this.formModal.hide()
-    this.getAllProduct();
-
   }
   deleteProduct(id: Number) {
     this.product = this.form.value

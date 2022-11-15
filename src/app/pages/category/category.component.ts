@@ -57,16 +57,16 @@ export class CategoryComponent implements OnInit {
     if (this.category.id == 0) {
       this.categoryService.addCategory(this.category).subscribe(response => {
         this.notificationService.showSuccess(response.message, "Success")
+        this.getAllCategories();
       })
     }
     else {
       this.categoryService.updateCategory(this.category).subscribe(response => {
         this.notificationService.showSuccess(response.message, "Success")
+        this.getAllCategories();
       })
     }
     this.formModal.hide()
-    this.getAllCategories();
-
   }
   deleteCategory(id: Number) {
     this.category = this.form.value

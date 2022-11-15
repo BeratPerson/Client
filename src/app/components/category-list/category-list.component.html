@@ -1,8 +1,10 @@
 <div class="container">
+    <h3 class="p-3">Home</h3>
     <div class="row">
         <div class="col-sm-4">
             <ul class="list-group">
-                <li class="list-group-item" [ngClass]="selectedCategoryId==0?'active':''" (click)="getProductByCategory(0);">Tümü</li>
+                <li class="list-group-item" [ngClass]="selectedCategoryId==0?'active':''"
+                    (click)="getProductByCategory(0);">Tümü</li>
                 <li *ngFor="let item of categories" class="list-group-item"
                     [ngClass]="selectedCategoryId==item.id?'active':''" (click)="getProductByCategory(item.id);">
                     {{item.categoryName}}</li>
